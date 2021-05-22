@@ -41,7 +41,7 @@ def notify_for_filter(users, filter):
 
     filter_slots = {}
     for item in filtered_list:
-        # print("====== GETTING SLOTS FOR {} {}=====".format(filter,item))
+        print("====== GETTING SLOTS FOR {} {}=====".format(filter,item))
         try:
             slots = cowin.get_calendar_by_filter(filter, date=current_date, pincode=item, district_id=item)
         except Exception as e:
