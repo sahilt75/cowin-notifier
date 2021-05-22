@@ -90,7 +90,6 @@ class Mailer:
           </body>
         </html>
         """
-        self.sendgrid_key = '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'
 
     def create_template(self, data):
         template = ""
@@ -135,22 +134,3 @@ class Mailer:
             except Exception as e:
                 print("Error sending mail {}".format(e))
 
-    def send_mail_sendgrid(self, key, emails, template):
-        personalization = Personalization()
-        for email in emails:
-            personalization.add_bcc(Email(email))
-        personalization.add_to(Email("nroeply.cowinnotifier@gmail.com"))
-        message = Mail(
-            from_email='noreply.cowinnotifier@gmail.com',
-            subject='Hurry! Vaccine slots are available.',
-            html_content=template
-        )
-        message.add_personalization(personalization)
-
-        try:
-            print("====Sending mail to {}=====".format(emails))
-            sg = SendGridAPIClient(self.sendgrid_key)
-            response = sg.send(message)
-            print("Mail sent.")
-        except Exception as e:
-            print("==== Error sending mail {}===== ".format(e.message))
